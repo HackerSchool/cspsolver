@@ -45,7 +45,23 @@ class SumOperation : Expression {
     }
 }
 
-Dúvida: Constraint vs Expression. Queremos distinguir? Como?
+Dúvida: Constraint vs Expression. Queremos distinguir? Como? Ter Type, mas int na mesma.
+
+
+class Expression {
+    Type* type;
+    
+    Value* eval();
+}
+
+if (e->getType() == TYPE_BOOL) {
+    //OK
+}
+else {
+    //NOK
+}
+
+
 
 class Constraint {
     private:
