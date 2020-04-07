@@ -10,7 +10,8 @@ public:
     AddOperation(Expression *left, Expression *right) : _left(left), _right(right), Expression() {
         _variables = left->getVariables();
         std::list<int> right_vars = right->getVariables();
-        //for (std::list<int>::iterator it = )
+
+        // TODO - Merge right_vars to _variables
     }
 
 };
