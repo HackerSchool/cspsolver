@@ -5,15 +5,17 @@
 class AddOperation : public Expression {
 private:
     Expression *_left, *_right;
-    std::list<int> _variables;
 public:
     AddOperation(Expression *left, Expression *right) : _left(left), _right(right), Expression() {
-        _variables = left->getVariables();
-        std::list<int> right_vars = right->getVariables();
-
-        // TODO - Merge right_vars to _variables
+        std::set<int> left_vars = left->getVariables();
+        std::set<int> right_vars = right->getVariables();
+        std::set_union(left_vars.begin(), left_vars.end(),
+                       right_vars.begin(), right_vars.end(),
+                       std::inserter(_variables, _variables.begin()));
     }
-
+    Value *eval(Context *ctx) {
+        return (_left->eval(ctx))->add(_right->eval(ctx));
+    }
 };
 
 #endif

@@ -5,10 +5,9 @@
 class Variable : public Expression {
 private:
     int _id;
-    std::list<int> _variables;
 public:
     Variable(int id) : _id(id), Expression() {
-        _variables.push_front(_id);
+        _variables.insert(_id);
     }
     Value *eval(Context *ctx) {
         if (ctx->assigned(_id))
@@ -16,7 +15,6 @@ public:
         else
             throw "Error: Variable is not assigned";
     }
-    const std::list<int> &getVariables() { return _variables; }
 };
 
 #endif
