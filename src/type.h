@@ -3,9 +3,10 @@
 
 class Type {
 public:
-    enum TypeId {ID_INTEGER};
+    enum TypeId {ID_INTEGER, ID_DOMAIN};
 public:
     static Type INTEGER;
+    static Type DOMAIN;
 private:
     TypeId _id;
 public:
