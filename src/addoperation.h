@@ -17,7 +17,7 @@ public:
         Value* left = _left->eval(ctx);
         Value* right = _right->eval(ctx);
 
-        return left->getType()->add(right);
+        return left->add(right);
     }
 };
 

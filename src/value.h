@@ -1,13 +1,15 @@
 #ifndef VALUE_H
 #define VALUE_H
+#include <string>
+
 #include "type.h"
 
 class Value {
-private:
-    Type* _type;
 public:
-    Value(Type* type) : _type(type) {}
-    Type* getType () {return _type;}    
+    Value() {}
+    virtual Type* getType () = 0;
+    virtual std::string toString () = 0;
+    virtual Value* add(Value* right) = 0;
 };
 
 #endif

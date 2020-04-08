@@ -1,24 +1,18 @@
 #ifndef TYPE_H
 #define TYPE_H
 
-class Value;
-
 class Type {
 public:
-    Type () {}
+    enum TypeId {ID_INTEGER};
+public:
+    static Type INTEGER;
+private:
+    TypeId _id;
+public:
+    Type (TypeId id) : _id(id) {}
     virtual bool equals (Type* type) {
-        return this == type;
+        return this->_id == type->_id; 
     }
-
-    virtual bool addAvailable (Type* right) = 0;
-    virtual bool subAvailable (Type* right) = 0;
-    virtual bool mulAvailable (Type* right) = 0;
-    virtual bool divAvailable (Type* right) = 0;
-
-    virtual Value* add (Value* right) = 0;
-    virtual Value* sub (Value* right) = 0;
-    virtual Value* mul (Value* right) = 0;
-    virtual Value* div (Value* right) = 0;
 };
 
 #endif
