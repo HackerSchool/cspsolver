@@ -3,18 +3,10 @@
 #include <set>
 #include <algorithm>
 #include <iterator>
+#include "value.h"
+#include "context.h"
 
 class Type;
-class Value {
-public:
-    Value *add(Value *other);
-};
-class Context {
-public:
-    bool assigned(int _id);
-    Value *value(int _id);
-    void assign(int _id, Value *value);
-};
 
 class Expression {
 private:

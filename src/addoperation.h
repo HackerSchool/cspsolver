@@ -14,7 +14,10 @@ public:
                        std::inserter(_variables, _variables.begin()));
     }
     Value *eval(Context *ctx) {
-        return (_left->eval(ctx))->add(_right->eval(ctx));
+        Value* left = _left->eval(ctx);
+        Value* right = _right->eval(ctx);
+
+        return left->getType()->add(right);
     }
 };
 
