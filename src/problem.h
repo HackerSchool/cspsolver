@@ -1,18 +1,18 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
 #include <vector>
-#include "variabledefinition.h"
-#include "context.h"
-
-class Constraint;
+#include "variableset.h"
+#include "constraintset.h"
 
 class Problem {
 private:
-    std::vector<VariableDefinition*> _variableDefs;
-    std::vector<Constraint*> _constraints;
-    Context _context;
+    VariableSet _variables;
+    ConstraintSet _constraints;
 public:
     Problem() {}
+    void addVariable (Variable* var) {_variables.add(var);}
+    void addConstraint (Constraint* ctr) {_constraints.add(ctr);}
+    int searchVariableId (const std::string& name);
     void solve ();
 };
 

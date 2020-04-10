@@ -8,43 +8,42 @@
 #include "addoperation.h"
 #include <map>
 
+//fixme does not need to be global. problem->addVariable, problem->searchVariable,
 static std::map<std::string, int> map;
 static int globalFixme = 0;
 extern int yylex();
-void yyerror(const char* message) {
+void yyerror(Problem* problem, const char* message) {
     std::cerr << message;
 };
 %}
-
-%union { int i; std::string *s; Expression* e; VariableDefinition* vdef; VariablesDefinitions* vdefs; Constraint* c; ConstraintSet* cs;}
+%parse-param {Problem *problem}
+%union { int i; std::string *s; Expression* e; Variable* var; Constraint* c; }
 
 %token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN
 %token<i> tINTEGER
 %token<s> tIDENTIFIER
 %type<e> expression variable_id 
-%type<vdef> variable_def
-%type<vdefs> variables_defs
+%type<var> variable
 %type<c> constraint
-%type<cs> constraints
 
 %right '='
 %left '+' '-'
 %left '*' '/' '%'
 %start problem
 %%
-problem : tPROBLEM tIDENTIFIER ':' variables_defs constraints
+problem : tPROBLEM tIDENTIFIER ':' variables constraints
         ;
         
-variables_defs  : variable_def                  { $$ = new VariablesDefinitions (); $$->add($1); }
-                | variables_defs variable_def   { $$ = $1; $$->add($2); }
-                ;
+variables  : variable                  { problem->addVariable($1); }
+           | variables variable   { problem->addVariable($2); }
+           ;
                 
-constraints : constraint                { $$ = new ConstraintSet (); $$->add($1); }
-            | constraints constraint    { $$ = $1; $$->add($2); }
+constraints : constraint                { problem->addConstraint($1); }
+            | constraints constraint    { problem->addConstraint($2); }
             ;
             
-variable_def : tVARIABLE tIDENTIFIER tWITH tDOMAIN expression { $$ = new VariableDefinition ($5, nullptr, globalFixme++); }
-             ;
+variable : tVARIABLE tIDENTIFIER tWITH tDOMAIN expression { $$ = new Variable ($5, &Type::INTEGER, *$2); }
+         ;
 
 constraint : tCONSTRAINT expression  { $$ = new Constraint($2); }
            ;
@@ -57,8 +56,5 @@ expression : expression '+' expression  { $$ = new AddOperation ($1, $3); }
            | variable_id                { $$ = $1;}
            ;
            
-variable_id : tIDENTIFIER { $$ = new VariableIdentifier (globalFixme++); }
+variable_id : tIDENTIFIER { $$ = new VariableIdentifier (problem->searchVariableId(*$1)); }
 %%
-int main () {
-    yyparse();
-}

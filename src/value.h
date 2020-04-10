@@ -1,7 +1,6 @@
 #ifndef VALUE_H
 #define VALUE_H
 #include <string>
-
 #include "type.h"
 
 class Value {
