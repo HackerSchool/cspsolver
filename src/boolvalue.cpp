@@ -6,4 +6,4 @@ std::string BoolValue::toString () {
 
 Value* BoolValue::add(Value* right) {
     throw "BOOL: add not supported";
-};
+}
