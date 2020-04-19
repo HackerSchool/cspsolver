@@ -2,12 +2,12 @@
 #define VARIABLE_H
 #include <string>
 #include "expression.h"
-#include "domainvalue.h"
+#include "setvalue.h"
 
 class Variable {
 private:
     Expression* _domainExp;
-    DomainValue* _domain;
+    SetValue* _domain;
     Type* _type;
     std::string _name;
     int _id;
