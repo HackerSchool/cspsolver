@@ -12,6 +12,7 @@ public:
     Type* getType () {return &Type::INTEGER;}
     std::string toString ();
     Value* add(Value* right);
+    Value* multiply(Value* right);
 };
 
 #endif

@@ -9,6 +9,7 @@ public:
     virtual Type* getType () = 0;
     virtual std::string toString () = 0;
     virtual Value* add(Value* right) = 0;
+    virtual Value* multiply(Value* right) = 0;
 };
 
 #endif

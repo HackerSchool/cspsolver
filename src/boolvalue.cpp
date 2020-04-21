@@ -7,3 +7,7 @@ std::string BoolValue::toString () {
 Value* BoolValue::add(Value* right) {
     throw "BOOL: add not supported";
 }
+
+Value* BoolValue::multiply(Value* right) {
+    throw "BOOL: multiply not supported";
+}
