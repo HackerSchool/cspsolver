@@ -11,6 +11,7 @@ public:
     Type* getType () {return &Type::SET;}
     std::string toString ();
     Value* add(Value* right);
+    Value* multiply(Value* right);
 };
 
 #endif
