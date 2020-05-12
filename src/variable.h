@@ -15,9 +15,9 @@ public:
     Variable (Expression* domainExp, Type* type, const std::string & name) :
         _domainExp(domainExp), _type(type), _domain(nullptr), _name(name) {}
     
-    // really need Context? And if variable identifier pointed to this?
-    Value* value (Context* ctx) {return ctx->value(_id);}
-    void assign (Context* ctx, Value* value) {ctx->assign(_id, value);}
+    // FIXME really need Context? And if variable identifier pointed to this?
+    std::shared_ptr<Value> value (Context* ctx) {return ctx->value(_id);}
+    void assign (Context* ctx, std::shared_ptr<Value> value) {ctx->assign(_id, value);}
     bool assigned (Context* ctx) {return ctx->assigned(_id);}
     
     void setId (int id) {_id = id;}

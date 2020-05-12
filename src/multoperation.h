@@ -13,9 +13,9 @@ public:
                        right_vars.begin(), right_vars.end(),
                        std::inserter(_variables, _variables.begin()));
     }
-    Value *eval(Context *ctx) {
-        Value* left = _left->eval(ctx);
-        Value* right = _right->eval(ctx);
+    std::shared_ptr<Value> eval(Context *ctx) {
+        std::shared_ptr<Value> left = _left->eval(ctx);
+        std::shared_ptr<Value> right = _right->eval(ctx);
 
         return left->multiply(right);
     }

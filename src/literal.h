@@ -4,10 +4,10 @@
 
 class Literal : public Expression {
 private:
-    Value *_value;
+    std::shared_ptr<Value> _value;
 public:
     Literal(Value *value) : _value(value), Expression() {}
-    Value *eval(Context *ctx) {
+    std::shared_ptr<Value> eval(Context *ctx) {
         return _value;
     }
 };

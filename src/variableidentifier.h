@@ -9,7 +9,7 @@ public:
     VariableIdentifier(int id) : _id(id), Expression() {
         _variables.insert(_id);
     }
-    Value *eval(Context *ctx) {
+    std::shared_ptr<Value> eval(Context *ctx) {
         if (ctx->assigned(_id))
             return ctx->value(_id);
         else

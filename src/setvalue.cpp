@@ -4,10 +4,10 @@ std::string SetValue::toString () {
     return "TODO: DEFINE";
 }
 
-Value* SetValue::add(Value* right) {
+std::shared_ptr<Value> SetValue::add(std::shared_ptr<Value> right) {
     throw "SetValue::add Error";
 }
 
-Value* SetValue::multiply(Value* right) {
+std::shared_ptr<Value> SetValue::multiply(std::shared_ptr<Value> right) {
     throw "SetValue::multiply Error";
 }

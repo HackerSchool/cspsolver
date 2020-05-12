@@ -11,8 +11,8 @@ public:
     IntegerValue(int val) : _val(val) {}
     Type* getType () {return &Type::INTEGER;}
     std::string toString ();
-    Value* add(Value* right);
-    Value* multiply(Value* right);
+    std::shared_ptr<Value> add(std::shared_ptr<Value> right);
+    std::shared_ptr<Value> multiply(std::shared_ptr<Value> right);
 };
 
 #endif

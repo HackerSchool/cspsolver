@@ -5,12 +5,12 @@
 
 class Context {
 private:
-    std::vector<Value*> _values;
+    std::vector<std::shared_ptr<Value>> _values;
 public:
     Context();
     bool assigned(int _id);
-    Value *value(int _id);
-    void assign(int _id, Value *value);
+    std::shared_ptr<Value> value(int _id);
+    void assign(int _id, std::shared_ptr<Value> value);
 };
 
 #endif

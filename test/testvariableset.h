@@ -14,6 +14,9 @@ private:
     CPPUNIT_TEST_SUITE(TestVariableSet);
     CPPUNIT_TEST(test1);
     CPPUNIT_TEST_SUITE_END();
+
+private:
+    
     
 public:
     TestVariableSet ();

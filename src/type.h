@@ -12,9 +12,7 @@ private:
     TypeId _id;
 public:
     Type (TypeId id) : _id(id) {}
-    virtual bool equals (Type* type) {
-        return this->_id == type->_id; 
-    }
+    virtual bool equals (Type* type);
 };
 
 #endif
