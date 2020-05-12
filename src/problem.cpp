@@ -5,5 +5,5 @@ int Problem::searchVariableId (const std::string& name) {
 }
 
 void Problem::solve () {
-
+    
 }
