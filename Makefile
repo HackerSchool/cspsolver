@@ -26,10 +26,6 @@ lex.yy.o: lex.yy.c y.tab.h
 clean: 
 	rm -f src/*.o *.o *.output *tab* *yy* cspsolver test/maintest test/*.o
 
-test: test/maintest
-	echo $(MESSAGE)
-	test/maintest
-
 test/maintest: $(TEST_OBJ_FILES) $(OBJ_FILES)
 	g++ $(TEST_OBJ_FILES) $(OBJ_FILES) $(TEST_LIB_FLAGS) -o test/maintest
 

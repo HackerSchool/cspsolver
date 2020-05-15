@@ -15,13 +15,11 @@ public:
     Variable (Expression* domainExp, Type* type, const std::string & name) :
         _domainExp(domainExp), _type(type), _domain(nullptr), _name(name) {}
     
-    // FIXME really need Context? And if variable identifier pointed to this?
-    std::shared_ptr<Value> value (Context* ctx) {return ctx->value(_id);}
-    void assign (Context* ctx, std::shared_ptr<Value> value) {ctx->assign(_id, value);}
-    bool assigned (Context* ctx) {return ctx->assigned(_id);}
-    
     void setId (int id) {_id = id;}
     const std::string& name () {return _name;}
+
+    size_t domainSize () { return _domain->size(); }
+    std::shared_ptr<Value> getDomainValue (size_t i) { return _domain->get(i); }
 };
 
 #endif

@@ -3,7 +3,7 @@
 #include <set>
 #include <algorithm>
 #include "value.h"
-#include "context.h"
+#include "assignmentset.h"
 
 class Type;
 
@@ -18,7 +18,7 @@ public:
     Type *getType() { return _type; }
     const std::set<int> &getVariables() { return _variables; }
 
-    virtual std::shared_ptr<Value> eval(Context *ctx) = 0;
+    virtual std::shared_ptr<Value> eval(AssignmentSet *set) = 0;
 };
 
 #endif

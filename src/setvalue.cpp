@@ -11,3 +11,7 @@ std::shared_ptr<Value> SetValue::add(std::shared_ptr<Value> right) {
 std::shared_ptr<Value> SetValue::multiply(std::shared_ptr<Value> right) {
     throw "SetValue::multiply Error";
 }
+
+std::shared_ptr<Value> SetValue::get(int id) {
+    // FIXME
+}

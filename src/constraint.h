@@ -8,7 +8,8 @@ private:
     Expression *_exp;
 public:
     Constraint(Expression* exp) : _exp(exp) {}
-    bool eval (Context* ctx) {return false;}
+    // FIXME complete
+    bool eval (AssignmentSet* set) { return false; }
 };
 
 #endif

@@ -1,2 +1,3 @@
 touch src/main.cpp
-make test MODE="-D TEST" MESSAGE=""
+make test/maintest MODE="-D TEST" MESSAGE=""
+test/maintest

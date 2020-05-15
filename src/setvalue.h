@@ -1,5 +1,5 @@
 #ifndef SET_VALUE_H
-#define SET_VALUE_h
+#define SET_VALUE_H
 
 #include "value.h"
 #include "type.h"
@@ -12,6 +12,9 @@ public:
     std::string toString ();
     std::shared_ptr<Value> add(std::shared_ptr<Value> right);
     std::shared_ptr<Value> multiply(std::shared_ptr<Value> right);
+
+    std::shared_ptr<Value> get(int id);
+    size_t size () { /* FIXME */ }
 };
 
 #endif

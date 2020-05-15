@@ -9,9 +9,9 @@ public:
     VariableIdentifier(int id) : _id(id), Expression() {
         _variables.insert(_id);
     }
-    std::shared_ptr<Value> eval(Context *ctx) {
-        if (ctx->assigned(_id))
-            return ctx->value(_id);
+    std::shared_ptr<Value> eval(AssignmentSet *set) {
+        if (set->assigned(_id))
+            return set->value(_id);
         else
             throw "Error: Variable is not assigned";
     }

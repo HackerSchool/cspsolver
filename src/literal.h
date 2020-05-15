@@ -7,9 +7,7 @@ private:
     std::shared_ptr<Value> _value;
 public:
     Literal(Value *value) : _value(value), Expression() {}
-    std::shared_ptr<Value> eval(Context *ctx) {
-        return _value;
-    }
+    std::shared_ptr<Value> eval(AssignmentSet *set) { return _value; }
 };
 
 #endif
