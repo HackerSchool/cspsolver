@@ -1,4 +1,6 @@
 #include "variableset.h"
+#include "errormessage.h"
+#include <exception>
 
 int VariableSet::searchId (const std::string& name) {
     for (int i = 0; i < _vector.size(); i++) {
@@ -7,7 +9,7 @@ int VariableSet::searchId (const std::string& name) {
             return i;
     }
 
-    throw "Error: not found";
+    throw EM_ID_NOT_FOUND;
 }
 
 void VariableSet::add (Variable* var) {
@@ -17,7 +19,7 @@ void VariableSet::add (Variable* var) {
 
 Variable* VariableSet::get (int id) {
     if (id >= _vector.size() || id < 0)
-        throw "Error: variable not found: invalid id";
+        throw EM_ID_OUT_OF_BOUNDS;
 
     return _vector[id];
 }

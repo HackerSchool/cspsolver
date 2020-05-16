@@ -20,6 +20,8 @@ public:
 
     size_t domainSize () { return _domain->size(); }
     std::shared_ptr<Value> getDomainValue (size_t i) { return _domain->get(i); }
+
+    int getId() { return _id; }
 };
 
 #endif

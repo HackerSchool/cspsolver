@@ -13,6 +13,9 @@ class TestVariableSet : public CppUnit::TestFixture
 private:
     CPPUNIT_TEST_SUITE(TestVariableSet);
     CPPUNIT_TEST(test1);
+    CPPUNIT_TEST(test2);
+    CPPUNIT_TEST(test3);
+    CPPUNIT_TEST(test4);
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -27,6 +30,9 @@ public:
 
     // tests
     void test1 ();
+    void test2 ();
+    void test3 ();
+    void test4 ();
 };
 
 
