@@ -7,13 +7,16 @@
 class Problem {
 private:
     // problem variables
-    VariableSet _variableSet;
+    VariableSet* _variableSet;
     // problem constraints
-    ConstraintSet _constraintSet;
+    ConstraintSet* _constraintSet;
+    // problem name
+    std::string _name;
 public:
     Problem() {}
-    void addVariable (Variable* var) {_variableSet.add(var);}
-    void addConstraint (Constraint* ctr) {_constraintSet.add(ctr);}
+    Problem(const std::string name, VariableSet* variables, ConstraintSet* constraints);
+    void addVariable (Variable* var) {_variableSet->add(var);}
+    void addConstraint (Constraint* ctr) {_constraintSet->add(ctr);}
     int searchVariableId (const std::string& name);
     void solve ();
 
