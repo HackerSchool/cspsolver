@@ -9,9 +9,7 @@ private:
 public:
     BoolValue(bool val) : _val(val) {}
     Type* getType () {return &Type::BOOL;}
-    std::string toString ();
-    std::shared_ptr<Value> add(std::shared_ptr<Value> right);
-    std::shared_ptr<Value> multiply(std::shared_ptr<Value> right);
+    std::string toString () { return std::to_string(_val); }
 };
 
 #endif

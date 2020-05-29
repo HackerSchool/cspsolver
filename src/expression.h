@@ -19,6 +19,7 @@ public:
     const std::set<int> &getVariables() { return _variables; }
 
     virtual std::shared_ptr<Value> eval(AssignmentSet *set) = 0;
+    virtual void check(AssignmentSet *set) = 0;
 };
 
 #endif

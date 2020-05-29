@@ -13,6 +13,7 @@ private:
 public:
     Type (TypeId id) : _id(id) {}
     virtual bool equals (Type* type);
+    TypeId id() { return _id; }
 };
 
 #endif

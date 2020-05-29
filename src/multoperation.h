@@ -13,12 +13,8 @@ public:
                        right_vars.begin(), right_vars.end(),
                        std::inserter(_variables, _variables.begin()));
     }
-    std::shared_ptr<Value> eval(AssignmentSet *set) {
-        std::shared_ptr<Value> left = _left->eval(set);
-        std::shared_ptr<Value> right = _right->eval(set);
-
-        return left->multiply(right);
-    }
+    std::shared_ptr<Value> eval(AssignmentSet *set);
+    void check (AssignmentSet *set);
 };
 
 #endif
