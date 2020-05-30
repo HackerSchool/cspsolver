@@ -6,6 +6,7 @@
 #include "integervalue.h"
 #include "variableidentifier.h"
 #include "addoperation.h"
+#include "setliteral.h"
 #include <map>
 
 //fixme does not need to be global. problem->addVariable, problem->searchVariable,
@@ -26,16 +27,18 @@ void yyerror(Problem** problem, const char* message) {
     VariableSet* vs;
     Constraint* c; 
     ConstraintSet* cs;
+    std::vector<Expression*>* es;
 }
 
 %token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN
 %token<i> tINTEGER
 %token<s> tIDENTIFIER
-%type<e> expression variable_id 
+%type<e> expression variable_id set_literal
 %type<v> variable
 %type<c> constraint
 %type<cs> constraints
 %type<vs> variables
+%type<es> expression_list
 
 
 %left '>' '<'
@@ -70,7 +73,17 @@ expression : expression '+' expression  { $$ = new AddOperation ($1, $3); }
            | expression '<' expression  {}
            | tINTEGER                   { $$ = new Literal(new IntegerValue (tINTEGER)); }
            | variable_id                { $$ = $1;}
+           | set_literal                { $$ = $1;}
            ;
            
 variable_id : tIDENTIFIER { $$ = new VariableIdentifier (*$1); }
+            ;
+            
+set_literal : '{' expression_list '}'   { $$ = new SetLiteral ($2); }
+            | '{' '}'                   { $$ = new SetLiteral ();}
+            ;
+    
+expression_list : expression { $$ = new std::vector<Expression*> (); $$->push_back($1); }
+                | expression_list expression { $$ = $1; $$->push_back($2); }
+                ;
 %%

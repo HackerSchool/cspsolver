@@ -11,6 +11,7 @@ public:
     IntegerValue(int val) : _val(val) {}
     Type* getType () {return &Type::INTEGER;}
     std::string toString () { return std::to_string(_val); }
+    int value () { return _val;};
 };
 
 #endif
