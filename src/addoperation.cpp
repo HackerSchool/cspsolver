@@ -6,7 +6,7 @@ std::shared_ptr<Value> AddOperation::eval(AssignmentSet *set) {
     auto l = std::dynamic_pointer_cast<IntegerValue>(_left->eval(set));
     auto r = std::dynamic_pointer_cast<IntegerValue>(_right->eval(set));
 
-    return std::make_shared<IntegerValue> (l->value() * r->value());
+    return std::make_shared<IntegerValue> (l->value() + r->value());
 }
 
 void AddOperation::check(VariableSet* set) {

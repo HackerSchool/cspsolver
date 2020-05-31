@@ -18,7 +18,7 @@ public:
     const std::string& name () {return _name;}
 
     std::shared_ptr<SetValue> evalDomain ();
-    void checkDomain ();
+    void check ();
 
     int getId() { return _id; }
     Type* getType() { return _type; }

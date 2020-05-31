@@ -2,6 +2,7 @@
 #include "assignmentset.h"
 #include "variableset.h"
 #include "errormessage.h"
+#include "unassignedvariable.h"
 
 std::shared_ptr<Value> VariableIdentifier::eval(AssignmentSet *set) {
     if (_id == -1) 
@@ -10,7 +11,7 @@ std::shared_ptr<Value> VariableIdentifier::eval(AssignmentSet *set) {
     if (set->assigned(_id))
         return set->value(_id);
     else
-        throw "Error: Variable is not assigned";
+        throw UnassignedVariable();
 }
 
 void VariableIdentifier::check (VariableSet* set) {

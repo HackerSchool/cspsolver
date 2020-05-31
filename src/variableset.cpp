@@ -35,5 +35,5 @@ Variable* VariableSet::getByName (const std::string& name) {
 
 void VariableSet::check () {
     for (Variable* var : _vector)
-        var->checkDomain(); // FIXME verifcar se é duplicado
+        var->check(); // FIXME verifcar se é duplicado
 }

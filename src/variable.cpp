@@ -11,6 +11,8 @@ std::shared_ptr<SetValue> Variable::evalDomain () {
     return std::dynamic_pointer_cast<SetValue> (_domainExp->eval(&set));
 }
 
-void Variable::checkDomain () {
+void Variable::check () {
     _domainExp->check(nullptr);
+    
+    // FIXME TODO check types of each domain 
 }
