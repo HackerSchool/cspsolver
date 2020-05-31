@@ -7,3 +7,8 @@ bool ConstraintSet::allTrue (AssignmentSet* set) {
     
     return true;
 }
+
+void ConstraintSet::check (VariableSet* set) {
+    for (Constraint* constraint : _vector)
+        constraint->check(set);
+}

@@ -14,6 +14,9 @@ public:
     
     // checks if all constraints in this set are respected
     bool allTrue (AssignmentSet* set);
+
+    // checks types
+    void check (VariableSet* set);
 };
 
 #endif

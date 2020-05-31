@@ -1,17 +1,17 @@
 %{
 #include <string>
+#include <vector>
 #include <iostream>
+
 #include "problem.h"
 #include "literal.h"
 #include "integervalue.h"
 #include "variableidentifier.h"
 #include "addoperation.h"
+#include "multoperation.h"
+#include "ltoperation.h"
 #include "setliteral.h"
-#include <map>
 
-//fixme does not need to be global. problem->addVariable, problem->searchVariable,
-static std::map<std::string, int> map;
-static int globalFixme = 0;
 extern int yylex();
 void yyerror(Problem** problem, const char* message) {
     std::cerr << message;
@@ -67,13 +67,13 @@ constraint : tCONSTRAINT expression ';' { $$ = new Constraint($2); }
            
 expression : expression '+' expression  { $$ = new AddOperation ($1, $3); }
            | expression '-' expression  {}
-           | expression '*' expression  {}
+           | expression '*' expression  { $$ = new MultOperation ($1, $3); }
            | expression '/' expression  {}
            | expression '>' expression  {}
-           | expression '<' expression  {}
-           | tINTEGER                   { $$ = new Literal(new IntegerValue (tINTEGER)); }
-           | variable_id                { $$ = $1;}
-           | set_literal                { $$ = $1;}
+           | expression '<' expression  { $$ = new LtOperation ($1, $3); }
+           | tINTEGER                   { $$ = new Literal(new IntegerValue ($1)); }
+           | variable_id                { $$ = $1; }
+           | set_literal                { $$ = $1; }
            ;
            
 variable_id : tIDENTIFIER { $$ = new VariableIdentifier (*$1); }

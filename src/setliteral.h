@@ -10,7 +10,7 @@ public:
     SetLiteral(std::vector<Expression*> *list);
     SetLiteral();
     std::shared_ptr<Value> eval(AssignmentSet *set) { return _value; }
-    void check (AssignmentSet *set) { this->setType(&Type::SET); }
+    void check (VariableSet *set) { this->setType(&Type::SET); }
 };
 
 #endif

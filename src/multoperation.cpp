@@ -9,11 +9,13 @@ std::shared_ptr<Value> MultOperation::eval(AssignmentSet *set) {
     return std::make_shared<IntegerValue> (l->value() * r->value());
 }
 
-void MultOperation::check (AssignmentSet *set) {
+void MultOperation::check (VariableSet *set) {
     _left->check(set);
     _right->check(set);
 
     if (_left->getType()->id() != Type::ID_INTEGER || 
         _right->getType()->id() != Type::ID_INTEGER)
         throw EM_MULT_WRONG_TYPES;
+
+    setType(&Type::INTEGER);
 }

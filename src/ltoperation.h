@@ -1,6 +1,7 @@
-#ifndef ADDOPERATION_H
-#define ADDOPERATION_H
+#ifndef LTOPERATION_H
+#define LTOPERATION_H
 #include "expression.h"
+#include "variableset.h"
 
 class LtOperation : public Expression {
 private:
@@ -14,7 +15,7 @@ public:
                        std::inserter(_variables, _variables.begin()));
     }
     std::shared_ptr<Value> eval(AssignmentSet *set);
-    void check (AssignmentSet *set);
+    void check (VariableSet* set);
 };
 
 #endif

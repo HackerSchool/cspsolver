@@ -3,7 +3,9 @@
 #include <set>
 #include <algorithm>
 #include "value.h"
-#include "assignmentset.h"
+
+class AssignmentSet;
+class VariableSet;
 
 class Type;
 
@@ -19,7 +21,7 @@ public:
     const std::set<int> &getVariables() { return _variables; }
 
     virtual std::shared_ptr<Value> eval(AssignmentSet *set) = 0;
-    virtual void check(AssignmentSet *set) = 0;
+    virtual void check(VariableSet* set) = 0;
 };
 
 #endif

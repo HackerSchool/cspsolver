@@ -19,6 +19,7 @@ public:
     void addConstraint (Constraint* ctr) {_constraintSet->add(ctr);}
     int searchVariableId (const std::string& name);
     void solve ();
+    void check ();
 
 private:
     bool recursiveSolve (AssignmentSet* set);

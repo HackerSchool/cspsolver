@@ -2,6 +2,9 @@
 #include "assignmentset.h"
 #include "errormessage.h"
 
+/* FIXME need?*/
+#include <iostream>
+
 Problem::Problem(const std::string name, VariableSet* variables, ConstraintSet* constraints) :
      _name(name), _variableSet(variables), _constraintSet(constraints) {
     
@@ -18,7 +21,11 @@ void Problem::solve () {
     AssignmentSet assignmentSet(_variableSet->count());
 
     //solve by recursive backtracking
-    recursiveSolve(&assignmentSet);
+    if (recursiveSolve(&assignmentSet)) {
+        std::cout << assignmentSet.toString(_variableSet) << std::endl;
+    } else {
+        std::cout << "No solution" << std::endl;
+    }
 }
 
 bool Problem::recursiveSolve (AssignmentSet* set) {
@@ -27,12 +34,14 @@ bool Problem::recursiveSolve (AssignmentSet* set) {
     
     // select unassigned variable
     int varId = set->selectUnassigned();
-    Variable* variable = _variableSet->get(varId);
+    Variable* variable = _variableSet->getById(varId);
 
     // try each one of this values
-    for (size_t i = 0; i < variable->domainSize(); i++) {
+    auto domain = variable->evalDomain();
+
+    for (size_t i = 0; i < domain->size(); i++) {
         // try this one
-        set->assign(varId, variable->getDomainValue(i));
+        set->assign(varId, domain->get(i));
 
         if (_constraintSet->allTrue(set))
             if (recursiveSolve(set) == true)
@@ -43,4 +52,9 @@ bool Problem::recursiveSolve (AssignmentSet* set) {
 
     // if no value satisfies
     return false;
+}
+
+void Problem::check () {
+    _variableSet->check();
+    _constraintSet->check(_variableSet);
 }

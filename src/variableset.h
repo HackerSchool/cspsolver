@@ -20,7 +20,13 @@ public:
     int count () { return _vector.size(); }
 
     // returns the variable with the specified id
-    Variable* get (int id);
+    Variable* getById (int id);
+
+    // returns the (1st) variable with the name, or null if not found
+    Variable* getByName (const std::string& name);
+
+    // checks types
+    void check ();
 };
 
 #endif

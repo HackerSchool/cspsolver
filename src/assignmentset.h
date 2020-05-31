@@ -3,6 +3,8 @@
 #include <vector>
 #include "value.h"
 
+class VariableSet;
+
 class AssignmentSet {
 private:
     int _nextAssign;
@@ -31,6 +33,9 @@ public:
 
     // unassign a variable
     void unassign (int var);
+
+    //print
+    std::string toString (VariableSet* set);
 
 private:
     // throw exception if invalid id

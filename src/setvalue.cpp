@@ -2,7 +2,16 @@
 #include "errormessage.h"
 
 std::string SetValue::toString () {
-    return "TODO: DEFINE";
+    std::string ret = "{";
+
+    for (size_t i = 0; i < _values.size(); i++) {
+        ret += _values.at(i)->toString();
+        
+        if (i != _values.size() - 1)
+            ret += ", ";
+    }
+
+    return ret + "}";
 }
 
 std::shared_ptr<Value> SetValue::get(int id) {

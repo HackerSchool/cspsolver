@@ -14,8 +14,8 @@ public:
     Type* getType () {return &Type::SET;}
     std::string toString ();
 
-    std::shared_ptr<Value> get(int id);
-    size_t size () { /* FIXME */ }
+    std::shared_ptr<Value> get(int i);
+    size_t size () { return _values.size(); }
 };
 
 #endif

@@ -9,7 +9,9 @@ private:
 public:
     Constraint(Expression* exp) : _exp(exp) {}
     // FIXME complete
-    bool eval (AssignmentSet* set) { return false; }
+    bool eval (AssignmentSet* set);
+
+    void check (VariableSet* set);
 };
 
 #endif

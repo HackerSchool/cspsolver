@@ -16,7 +16,7 @@ public:
     void setId (int id) { _id = id; }
 
     std::shared_ptr<Value> eval(AssignmentSet *set);
-    void check (AssignmentSet *set);
+    void check (VariableSet* set);
 };
 
 #endif

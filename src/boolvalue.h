@@ -10,6 +10,7 @@ public:
     BoolValue(bool val) : _val(val) {}
     Type* getType () {return &Type::BOOL;}
     std::string toString () { return std::to_string(_val); }
+    bool value () { return _val; }
 };
 
 #endif

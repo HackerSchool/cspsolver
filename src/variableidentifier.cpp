@@ -1,4 +1,7 @@
 #include "variableidentifier.h"
+#include "assignmentset.h"
+#include "variableset.h"
+#include "errormessage.h"
 
 std::shared_ptr<Value> VariableIdentifier::eval(AssignmentSet *set) {
     if (_id == -1) 
@@ -10,6 +13,12 @@ std::shared_ptr<Value> VariableIdentifier::eval(AssignmentSet *set) {
         throw "Error: Variable is not assigned";
 }
 
-void VariableIdentifier::check (AssignmentSet *set) {
-    
+void VariableIdentifier::check (VariableSet* set) {
+    Variable* variable = set->getByName(_name);
+
+    if (variable == nullptr)
+        throw EM_VARIABLE_NAME_NOT_FOUND;
+
+    _id = variable->getId();
+    setType(variable->getType());
 }

@@ -14,7 +14,7 @@ public:
                        std::inserter(_variables, _variables.begin()));
     }
     std::shared_ptr<Value> eval(AssignmentSet *set);
-    void check (AssignmentSet *set);
+    void check (VariableSet* set);
 };
 
 #endif
