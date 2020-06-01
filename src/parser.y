@@ -9,7 +9,13 @@
 #include "variableidentifier.h"
 #include "addoperation.h"
 #include "multoperation.h"
+#include "divoperation.h"
+#include "suboperation.h"
 #include "ltoperation.h"
+#include "gtoperation.h"
+#include "geoperation.h"
+#include "leoperation.h"
+#include "eqoperation.h"
 #include "setliteral.h"
 
 extern int yylex();
@@ -30,7 +36,8 @@ void yyerror(Problem** problem, const char* message) {
     std::vector<Expression*>* es;
 }
 
-%token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN
+%token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN 
+%token tEQ tGE tLE
 %token<i> tINTEGER
 %token<s> tIDENTIFIER
 %type<e> expression variable_id set_literal
@@ -41,7 +48,7 @@ void yyerror(Problem** problem, const char* message) {
 %type<es> expression_list
 
 
-%left '>' '<'
+%left '>' '<' tEQ tGE tLE
 %left '+' '-'
 %left '*' '/' '%'
 %start problem
@@ -66,11 +73,14 @@ constraint : tCONSTRAINT expression ';' { $$ = new Constraint($2); }
            ;
            
 expression : expression '+' expression  { $$ = new AddOperation ($1, $3); }
-           | expression '-' expression  {}
+           | expression '-' expression  { $$ = new SubOperation ($1, $3); }
            | expression '*' expression  { $$ = new MultOperation ($1, $3); }
-           | expression '/' expression  {}
-           | expression '>' expression  {}
+           | expression '/' expression  { $$ = new DivOperation($1, $3); }
            | expression '<' expression  { $$ = new LtOperation ($1, $3); }
+           | expression '>' expression  { $$ = new GtOperation ($1, $3); }
+           | expression tEQ expression  { $$ = new EqOperation ($1, $3); }
+           | expression tGE expression  { $$ = new GeOperation ($1, $3); }
+           | expression tLE expression  { $$ = new LeOperation ($1, $3); }
            | tINTEGER                   { $$ = new Literal(new IntegerValue ($1)); }
            | variable_id                { $$ = $1; }
            | set_literal                { $$ = $1; }
