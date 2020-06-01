@@ -1,12 +1,13 @@
 #include "geoperation.h"
 #include "errormessage.h"
 #include "integervalue.h"
+#include "boolvalue.h"
 
 std::shared_ptr<Value> GeOperation::eval(AssignmentSet *set) {
     auto l = std::dynamic_pointer_cast<IntegerValue>(_left->eval(set));
     auto r = std::dynamic_pointer_cast<IntegerValue>(_right->eval(set));
 
-    return std::make_shared<IntegerValue> (l->value() >= r->value());
+    return std::make_shared<BoolValue> (l->value() >= r->value());
 }
 
 void GeOperation::check(VariableSet* set) {
