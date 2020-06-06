@@ -11,9 +11,12 @@
 "problem"                     return tPROBLEM;
 "variable"                    return tVARIABLE;
 "with"                        return tWITH;
+"true"                        return tTRUE;
+"false"                       return tFALSE;
 "=="                          return tEQ;
 "<="                          return tLE;
 ">="                          return tGE;
+"!="                          return tNE;
 [_[:alpha:]][_[:alnum:]]*     yylval.s = new std::string(yytext);  return tIDENTIFIER;
 [[:digit:]]+                  yylval.i = std::stoi(yytext); return tINTEGER; /*overlow catch*/
 [-+*/%^(){};><]               return *yytext;

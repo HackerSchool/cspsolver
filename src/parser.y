@@ -6,6 +6,7 @@
 #include "problem.h"
 #include "literal.h"
 #include "integervalue.h"
+#include "boolvalue.h"
 #include "variableidentifier.h"
 #include "addoperation.h"
 #include "multoperation.h"
@@ -16,6 +17,7 @@
 #include "geoperation.h"
 #include "leoperation.h"
 #include "eqoperation.h"
+#include "neoperation.h"
 #include "setliteral.h"
 
 extern int yylex();
@@ -36,8 +38,8 @@ void yyerror(Problem** problem, const char* message) {
     std::vector<Expression*>* es;
 }
 
-%token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN 
-%token tEQ tGE tLE
+%token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN tTRUE tFALSE
+%token tEQ tGE tLE tNE
 %token<i> tINTEGER
 %token<s> tIDENTIFIER
 %type<e> expression variable_id set_literal
@@ -48,7 +50,7 @@ void yyerror(Problem** problem, const char* message) {
 %type<es> expression_list
 
 
-%left '>' '<' tEQ tGE tLE
+%left '>' '<' tEQ tGE tLE tNE
 %left '+' '-'
 %left '*' '/' '%'
 %start problem
@@ -81,9 +83,13 @@ expression : expression '+' expression  { $$ = new AddOperation ($1, $3); }
            | expression tEQ expression  { $$ = new EqOperation ($1, $3); }
            | expression tGE expression  { $$ = new GeOperation ($1, $3); }
            | expression tLE expression  { $$ = new LeOperation ($1, $3); }
+           | expression tNE expression  { $$ = new NeOperation ($1, $3); }
            | tINTEGER                   { $$ = new Literal(new IntegerValue ($1)); }
+           | tTRUE                      { $$ = new Literal(new BoolValue (true)); }
+           | tFALSE                     { $$ = new Literal(new BoolValue (false)); }
            | variable_id                { $$ = $1; }
            | set_literal                { $$ = $1; }
+           | '(' expression ')'         { $$ = $2; }
            ;
            
 variable_id : tIDENTIFIER { $$ = new VariableIdentifier (*$1); }
