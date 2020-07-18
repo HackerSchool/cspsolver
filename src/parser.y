@@ -19,6 +19,8 @@
 #include "eqoperation.h"
 #include "neoperation.h"
 #include "setliteral.h"
+#include "range.h"
+#include "filter.h"
 
 extern int yylex();
 void yyerror(Problem** problem, const char* message) {
@@ -39,16 +41,15 @@ void yyerror(Problem** problem, const char* message) {
 }
 
 %token tPROBLEM tWITH tCONSTRAINT tVARIABLE tDOMAIN tTRUE tFALSE
-%token tEQ tGE tLE tNE
+%token tEQ tGE tLE tNE tRANGE tIN tFOR
 %token<i> tINTEGER
 %token<s> tIDENTIFIER
-%type<e> expression variable_id set_literal
+%type<e> expression variable_id set_literal range
 %type<v> variable
 %type<c> constraint
 %type<cs> constraints
 %type<vs> variables
 %type<es> expression_list
-
 
 %left '>' '<' tEQ tGE tLE tNE
 %left '+' '-'
@@ -89,11 +90,21 @@ expression : expression '+' expression  { $$ = new AddOperation ($1, $3); }
            | tFALSE                     { $$ = new Literal(new BoolValue (false)); }
            | variable_id                { $$ = $1; }
            | set_literal                { $$ = $1; }
+           | range                      { $$ = $1; }
+           | filter                     { $$ = $1; }
            | '(' expression ')'         { $$ = $2; }
            ;
            
 variable_id : tIDENTIFIER { $$ = new VariableIdentifier (*$1); }
             ;
+            
+filter : '{' expression tFOR tIDENTIFIER tIN expression '}'                { $$ = new Filter ($2, *$4, $6); delete $4; }
+       : '{' expression tFOR tIDENTIFIER tIN expression '|' expression '}' { $$ = new Filter ($2, *$4, $6, $8); delete $4; }
+       ;
+
+range : tRANGE '(' expression ',' expression ',' expression ')' { $$ = new Range ($3, $5, $7); }
+      | tRANGE '(' expression ',' expression ')'                { $$ = new Range ($3, $5);}
+      ;
             
 set_literal : '{' expression_list '}'   { $$ = new SetLiteral ($2); }
             | '{' '}'                   { $$ = new SetLiteral ();}

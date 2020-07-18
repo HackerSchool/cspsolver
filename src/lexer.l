@@ -13,13 +13,16 @@
 "with"                        return tWITH;
 "true"                        return tTRUE;
 "false"                       return tFALSE;
+"range"                       return tRANGE;
+"for"                         return tFOR;
+"in"                          return tIN;
 "=="                          return tEQ;
 "<="                          return tLE;
 ">="                          return tGE;
 "!="                          return tNE;
 [_[:alpha:]][_[:alnum:]]*     yylval.s = new std::string(yytext);  return tIDENTIFIER;
 [[:digit:]]+                  yylval.i = std::stoi(yytext); return tINTEGER; /*overlow catch*/
-[-+*/%^(){};><]               return *yytext;
+[-+*/%^(){};><,|]              return *yytext;
 [\n\t ]                       ;
 .                             ; /* ignore all the rest except \n*/
 %%

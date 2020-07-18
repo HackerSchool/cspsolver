@@ -9,7 +9,7 @@ private:
 public:
     BoolValue(bool val) : _val(val) {}
     Type* getType () {return &Type::BOOL;}
-    std::string toString () { return std::to_string(_val); }
+    std::string toString () { return _val ? "true" : "false"; }
     bool value () { return _val; }
 };
 
